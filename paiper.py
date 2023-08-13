@@ -6,7 +6,10 @@ from xhtml2pdf import pisa
 from io import BytesIO
 import pdfkit
 
-openai.api_key = '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'
+api_key_input = st.text_input("Enter your GPT API key:")
+
+if api_key_input:
+    openai.api_key = api_key_input
 
 def generate_response(prompt):
     completions = openai.Completion.create(
