@@ -11,6 +11,8 @@ api_key_input = st.text_input("Enter your GPT API key:")
 if api_key_input:
     openai.api_key = api_key_input
 
+toggle_list = [False, False, False, False]
+
 def generate_response(prompt):
     completions = openai.Completion.create(
         engine="text-davinci-003",
@@ -63,6 +65,12 @@ def format_output(output_text):
 
 st.header("🤖Econ paiper generator")
 
+for i in range(len(toggle_list)):
+    if st.button(f"{i+1}번 버튼 {i+1}"):
+        toggle_list[i] = not toggle_list[i]
+
+for i, toggle_value in enumerate(toggle_list):
+    st.write(f"{i+1}번 상태: {toggle_value}")
 
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []
